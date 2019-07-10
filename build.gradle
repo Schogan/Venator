@@ -1,9 +1,12 @@
 plugins {
 	id 'org.springframework.boot' version '2.2.0.M4'
 	id 'java'
+	id "com.diffplug.gradle.spotless" version "3.4.0"
+
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.diffplug.gradle.spotless"
 
 group = 'Venator'
 version = '0.0.1-SNAPSHOT'
@@ -31,3 +34,13 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+spotless {
+	java {
+		target project.fileTree(project.rootDir) {
+			include '**/*.java'
+		}
+		googleJavaFormat('1.6')
+	}
+}
+build.dependsOn 'spotlessApply'
