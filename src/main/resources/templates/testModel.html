@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Eve Lookup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Names To Get</h1>
+<form action="#" th:action="@{/getIdsByName}" th:object="${getIdByName}" method="post">
+    <p>Character: <input type="text" th:field="*{character}" /></p>
+    <p>System: <input type="text" th:field="*{system}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
