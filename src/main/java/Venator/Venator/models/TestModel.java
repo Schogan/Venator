@@ -13,22 +13,18 @@ public class TestModel {
   private String system;
 
   public String getCharacter() {
-    logger.info("Get character call: " + character);
     return character;
   }
 
   public void setCharacter(String character) {
     this.character = character;
-    logger.info("Set character call: " + character);
   }
 
   public String getSystem() {
-    logger.info("Get system call: " + system);
     return system;
   }
 
   public void setSystem(String system) {
-    logger.info("Set system call: " + system);
     this.system = system;
   }
 }
