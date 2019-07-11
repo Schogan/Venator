@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include
+    resource="org/springframework/cloud/gcp/autoconfigure/logging/logback-json-appender.xml"/>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+  <!-- The spring profile is defined by the environment variable, $SPRING_PROFILES_ACTIVE. -->
+
+  <springProfile name="default">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </root>
+  </springProfile>
+
+  <!--  lower to trace to see sql traffic -->
+  <logger name="com.google.cloud.sql.*" level="DEBUG">
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+  <!--  lower to debug to see http traffic -->
+  <logger name="org.apache.http.*" level="ERROR">
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+  <!--  lower to debug to see pubsub traffic -->
+  <logger name="cloud.google.com.pubsub.*" level="DEBUG">
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+  <logger name="org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping"
+    level="INFO">
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+
+
+  import ;
+
+
+</configuration>
