@@ -6,10 +6,11 @@ import com.squareup.okhttp.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class GetIdsByName {
+
   @Autowired public TestModel testModel;
 
   public String getIdsByName() throws IOException {

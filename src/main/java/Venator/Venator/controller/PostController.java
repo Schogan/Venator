@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostController {
 
-  @Autowired private GetIdsByName getIdsByName;
+  @Autowired public GetIdsByName getIdsByName;
 
   @RequestMapping("/getIdsByNamePost")
   public String jsonString() throws IOException {

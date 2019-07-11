@@ -1,9 +1,13 @@
 package Venator.Venator.models;
 
-import org.springframework.context.annotation.Configuration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class TestModel {
+
+  private static final Log logger = LogFactory.getLog(TestModel.class);
 
   private String character;
   private String system;
