@@ -6,10 +6,11 @@ import com.squareup.okhttp.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class GetIdsByName {
+
   @Autowired public TestModel testModel;
 
   public String getIdsByName() throws IOException {
@@ -36,8 +37,21 @@ public class GetIdsByName {
 
   public ArrayList getListOfNames() {
     ArrayList names = new ArrayList();
-    names.add(testModel.getCharacter());
-    names.add(testModel.getSystem());
+    if(testModel.getCharacter() != null) {
+      names.add(testModel.getCharacter());
+    }else{}
+    if(testModel.getCharacter() != null) {
+      names.add(testModel.getSystem());
+    }else{}
+    if(testModel.getCharacter() != null) {
+      names.add(testModel.getTheForge());
+    }else{}
+    if(testModel.getCharacter() != null) {
+      names.add(testModel.getWickedCreek());
+    }else{}
+    if(testModel.getCharacter() != null) {
+      names.add(testModel.getBleakLands());
+    }else{}
 
     return names;
   }

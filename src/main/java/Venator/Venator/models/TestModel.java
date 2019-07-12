@@ -1,12 +1,43 @@
 package Venator.Venator.models;
 
-import org.springframework.context.annotation.Configuration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class TestModel {
+
+  private static final Log logger = LogFactory.getLog(TestModel.class);
 
   private String character;
   private String system;
+  private String WickedCreek;
+  private String TheForge;
+  private String BleakLands;
+
+  public String getWickedCreek() {
+    return WickedCreek;
+  }
+
+  public void setWickedCreek(String wickedCreek) {
+    this.WickedCreek = wickedCreek;
+  }
+
+  public String getTheForge() {
+    return TheForge;
+  }
+
+  public void setTheForge(String theForge) {
+    this.TheForge = theForge;
+  }
+
+  public String getBleakLands() {
+    return BleakLands;
+  }
+
+  public void setBleakLands(String bleakLands) {
+    this.BleakLands = bleakLands;
+  }
 
   public String getCharacter() {
     return character;
