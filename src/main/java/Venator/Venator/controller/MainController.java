@@ -14,8 +14,7 @@ public class MainController {
   @Autowired public TestModel testModel;
 
   @GetMapping("/getIdsByName")
-  public String nameForm(Model model) {
-    model.addAttribute("getIdByName", new TestModel());
+  public String nameForm() {
     return "testModel";
   }
 

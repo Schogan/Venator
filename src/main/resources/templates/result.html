@@ -1,13 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Eve Lookup</title>
+    <title>Thymeleaf Form Result</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Result</h1>
-<p th:text="'Character: ' + ${testModel.character}" />
-<p th:text="'System: ' + ${testModel.system}" />
-<a href="/getIdsByName">Submit another message</a>
+<p th:text="'Here you go Bud!'" />
+
+<p th:text= "'Text Value: ' + ${command.textField}" />
+<p th:text= "'Textarea Value: ' + ${command.textareaField}" />
+<p th:text= "'Datetime Value: ' + ${command.datetimeField}" />
+<p th:text= "'Color Value: ' + ${command.colorField}" />
+<p th:text= "'Single Checkbox Value: ' + ${command.singleCheckboxField}" />
+<p th:text= "'Multi Checkbox Value: ' + ${#strings.arrayJoin(command.multiCheckboxSelectedValues, ', ')}" />
+<p th:text= "'Checkbox Value: ' + ${command.radioButtonSelectedValue}" />
+<p th:text= "'Dropdown Value: ' + ${command.dropdownSelectedValue}" />
+
+<a href="/fooform">resubmit form</a>
 </body>
 </html>
