@@ -26,6 +26,7 @@ public class MainController {
   public String nameSubmit(@ModelAttribute TestModel testModel) {
     this.testModel.setCharacter(testModel.getCharacter());
     this.testModel.setSystem(testModel.getSystem());
+    this.testModel.setMultiCheckboxSelectedValues(testModel.getMultiCheckboxSelectedValues());
     return "result";
   }
 
