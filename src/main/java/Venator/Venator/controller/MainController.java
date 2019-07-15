@@ -26,16 +26,58 @@ public class MainController {
   public String nameSubmit(@ModelAttribute TestModel testModel) {
     this.testModel.setCharacter(testModel.getCharacter());
     this.testModel.setSystem(testModel.getSystem());
+    this.testModel.setMultiCheckboxSelectedValues(testModel.getMultiCheckboxSelectedValues());
     return "result";
   }
 
   @ModelAttribute("multiCheckboxAllValues")
   public String[] getMultiCheckboxAllValues() {
-    return new String[] {"Black Rise", "Catch", "Cloud Ring", "Cobalt Edge", "Delve", "Derelik", "Devoid",
-            "Domain", "Esoteria", "Essence", "Etherium Reach", "Everyshore", "Feythabolis", "Fountain", "Genesis",
-            "Great Wildlands", "Heimatar", "Immensea", "Kador", "Kalevala Expanse", "Khanid", "Kor-Azor",
-            "Lonetrek", "Malpais", "Metropolis", "Molden Heath", "Oasa", "Outer Passage", "Outer Ring", "Period Basis",
-            "Perrigen Falls", "Placid", "Querious", "Sinq Laison", "Solitude", "Spire", "Stain", "Syndicate", "Tash Murkon",
-            "Tenal", "The Bleak Lands", "The Forge", "Vale of the Silent", "Wicked Creek", "Miscellaneous Entries"};
+    return new String[] {
+      "Black Rise",
+      "Catch",
+      "Cloud Ring",
+      "Cobalt Edge",
+      "Delve",
+      "Derelik",
+      "Devoid",
+      "Domain",
+      "Esoteria",
+      "Essence",
+      "Etherium Reach",
+      "Everyshore",
+      "Feythabolis",
+      "Fountain",
+      "Genesis",
+      "Great Wildlands",
+      "Heimatar",
+      "Immensea",
+      "Kador",
+      "Kalevala Expanse",
+      "Khanid",
+      "Kor-Azor",
+      "Lonetrek",
+      "Malpais",
+      "Metropolis",
+      "Molden Heath",
+      "Oasa",
+      "Outer Passage",
+      "Outer Ring",
+      "Period Basis",
+      "Perrigen Falls",
+      "Placid",
+      "Querious",
+      "Sinq Laison",
+      "Solitude",
+      "Spire",
+      "Stain",
+      "Syndicate",
+      "Tash Murkon",
+      "Tenal",
+      "The Bleak Lands",
+      "The Forge",
+      "Vale of the Silent",
+      "Wicked Creek",
+      "Miscellaneous Entries"
+    };
   }
 }
