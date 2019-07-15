@@ -1,9 +1,7 @@
 package Venator.Venator.models;
 
-import org.springframework.stereotype.Component;
-
 import java.awt.*;
-import java.util.ArrayList;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TestModel {
@@ -18,7 +16,8 @@ public class TestModel {
   public void setMultiCheckboxSelectedValues(String[] multiCheckboxSelectedValues) {
     this.multiCheckboxSelectedValues = multiCheckboxSelectedValues;
   }
-public String getCharacter() {
+
+  public String getCharacter() {
     return character;
   }
 
