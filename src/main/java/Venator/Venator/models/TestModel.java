@@ -1,45 +1,24 @@
 package Venator.Venator.models;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 @Component
 public class TestModel {
-
-  private static final Log logger = LogFactory.getLog(TestModel.class);
-
   private String character;
   private String system;
-  private String WickedCreek;
-  private String TheForge;
-  private String BleakLands;
+  String[] multiCheckboxSelectedValues;
 
-  public String getWickedCreek() {
-    return WickedCreek;
+  public String[] getMultiCheckboxSelectedValues() {
+    return multiCheckboxSelectedValues;
   }
 
-  public void setWickedCreek(String wickedCreek) {
-    this.WickedCreek = wickedCreek;
+  public void setMultiCheckboxSelectedValues(String[] multiCheckboxSelectedValues) {
+    this.multiCheckboxSelectedValues = multiCheckboxSelectedValues;
   }
-
-  public String getTheForge() {
-    return TheForge;
-  }
-
-  public void setTheForge(String theForge) {
-    this.TheForge = theForge;
-  }
-
-  public String getBleakLands() {
-    return BleakLands;
-  }
-
-  public void setBleakLands(String bleakLands) {
-    this.BleakLands = bleakLands;
-  }
-
-  public String getCharacter() {
+public String getCharacter() {
     return character;
   }
 

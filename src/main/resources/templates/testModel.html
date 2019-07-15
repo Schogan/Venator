@@ -9,9 +9,16 @@
 <form action="#" th:action="@{/getIdsByName}" th:object="${getIdByName}" method="post">
     <p>Character: <textarea rows = "4" cols = "40" th:field="*{character}"></textarea></p>
     <p>System: <input type="text" th:field="*{system}" /></p>
-    <input type="checkbox" name="Wicked Creek" value="Wicked Creek"> Wicked Creek<br>
-    <input type="checkbox" name="The Forge" value="The Forge"> The Forge<br>
-    <input type="checkbox" name="Bleak Lands" value="Bleak Lands"> Bleak Lands<br>
+    <ul>
+        <li th:each="checkboxValue: ${multiCheckboxAllValues}">
+            <input type="checkbox"
+                   th:field="*{multiCheckboxSelectedValues}"
+                   th:value="${checkboxValue}" />
+            <label
+                    th:for="${#ids.prev('multiCheckboxSelectedValues')}"
+                    th:text="${checkboxValue}"></label>
+        </li>
+    </ul>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 </body>

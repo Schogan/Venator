@@ -5,6 +5,11 @@ import com.google.gson.Gson;
 import com.squareup.okhttp.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +18,13 @@ public class GetIdsByName {
 
   @Autowired public TestModel testModel;
 
+  private static final Log logger = LogFactory.getLog(GetIdsByName.class);
+
   public String getIdsByName() throws IOException {
     OkHttpClient client = new OkHttpClient();
 
     ArrayList names = getListOfNames();
+//    ArrayList<String> names = new ArrayList<>(Arrays.asList(testModel.getMultiCheckboxSelectedValues()));
     String newIds = new Gson().toJson(names);
 
     MediaType mediaType = MediaType.parse("application/json");
@@ -36,22 +44,22 @@ public class GetIdsByName {
   }
 
   public ArrayList getListOfNames() {
-    ArrayList names = new ArrayList();
-    if(testModel.getCharacter() != null) {
-      names.add(testModel.getCharacter());
-    }else{}
-    if(testModel.getCharacter() != null) {
-      names.add(testModel.getSystem());
-    }else{}
-    if(testModel.getCharacter() != null) {
-      names.add(testModel.getTheForge());
-    }else{}
-    if(testModel.getCharacter() != null) {
-      names.add(testModel.getWickedCreek());
-    }else{}
-    if(testModel.getCharacter() != null) {
-      names.add(testModel.getBleakLands());
-    }else{}
+    ArrayList<String> names = new ArrayList<>(Arrays.asList(testModel.getMultiCheckboxSelectedValues()));
+//    if(testModel.getCharacter() != null) {
+//      names.add(testModel.getCharacter());
+//    }else{}
+//    if(testModel.getCharacter() != null) {
+//      names.add(testModel.getSystem());
+//    }else{}
+//    if(testModel.getCharacter() != null) {
+//      names.add(testModel.getTheForge());
+//    }else{}
+//    if(testModel.getCharacter() != null) {
+//      names.add(testModel.getWickedCreek());
+//    }else{}
+//    if(testModel.getCharacter() != null) {
+//      names.add(testModel.getBleakLands());
+//    }else{}
 
     return names;
   }
