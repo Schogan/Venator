@@ -45,21 +45,6 @@ public class GetIdsByName {
   public ArrayList getListOfNames() {
     ArrayList<String> names =
         new ArrayList<>(Arrays.asList(testModel.getMultiCheckboxSelectedValues()));
-    //    if(testModel.getCharacter() != null) {
-    //      names.add(testModel.getCharacter());
-    //    }else{}
-    //    if(testModel.getCharacter() != null) {
-    //      names.add(testModel.getSystem());
-    //    }else{}
-    //    if(testModel.getCharacter() != null) {
-    //      names.add(testModel.getTheForge());
-    //    }else{}
-    //    if(testModel.getCharacter() != null) {
-    //      names.add(testModel.getWickedCreek());
-    //    }else{}
-    //    if(testModel.getCharacter() != null) {
-    //      names.add(testModel.getBleakLands());
-    //    }else{}
 
     return names;
   }
