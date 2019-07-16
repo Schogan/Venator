@@ -6,9 +6,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 public class GetConstellation {
-  public String constellationId;
-
-  public String getConstellation() throws IOException {
+  public static String getConstellation(String constellationId) throws IOException {
 
     OkHttpClient client = new OkHttpClient();
 

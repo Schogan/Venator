@@ -6,9 +6,8 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 public class GetRegion {
-  public String regionId;
 
-  public String getRegion() throws IOException {
+  public static String getRegion(String regionId) throws IOException {
 
     OkHttpClient client = new OkHttpClient();
 

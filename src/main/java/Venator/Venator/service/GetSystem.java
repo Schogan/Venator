@@ -7,9 +7,7 @@ import java.io.IOException;
 
 public class GetSystem {
 
-  public String systemId;
-
-  public String getSystemId() throws IOException {
+  public static String getSystemId(String systemId) throws IOException {
 
     OkHttpClient client = new OkHttpClient();
 
