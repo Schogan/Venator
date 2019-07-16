@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegionMappingRepository extends JpaRepository<RegionMappingEntity, Long> {
 
-        public RegionMappingEntity findByRegionIdAndConstellationIdAndSystemId(Long regionId,
-                                                                      Long constellationId,
-                                                                      Long systemId);
-        public RegionMappingEntity findByRegionId(Long regionId);
+  public RegionMappingEntity findByRegionIdAndConstellationIdAndSystemId(
+      Long regionId, Long constellationId, Long systemId);
 
-        public RegionMappingEntity findByConstellationId(Long constellationId);
+  public RegionMappingEntity findByRegionId(Long regionId);
 
-        public RegionMappingEntity findBySystemId(Long systemId);
+  public RegionMappingEntity findByConstellationId(Long constellationId);
+
+  public RegionMappingEntity findBySystemId(Long systemId);
 }

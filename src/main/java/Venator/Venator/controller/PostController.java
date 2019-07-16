@@ -1,7 +1,6 @@
 package Venator.Venator.controller;
 
-import Venator.Venator.service.GetIdsByName;
-import Venator.Venator.service.GetSystemKills;
+import Venator.Venator.service.*;
 import java.io.FileReader;
 import java.io.IOException;
 import org.json.simple.JSONArray;
@@ -35,15 +34,27 @@ public class PostController {
     JSONArray jsonArray =
         (JSONArray) readJsonSimpleDemo("src/main/resources/json_config/RegionMappings.json");
     JSONObject obj;
-
+    JSONParser jsonParser = new JSONParser();
     for (int i = 0; i < jsonArray.size(); i++) {
       obj = (JSONObject) (jsonArray.get(i));
       String regionId = obj.get("id").toString();
+      JSONObject region = (JSONObject) jsonParser.parse(GetRegion.getRegion(regionId));
+      JSONArray constellations = (JSONArray) region.get("constellations");
+      for (int j = 0; j < constellations.size(); j++) {
+        JSONObject constel =
+            (JSONObject)
+                jsonParser.parse(
+                    GetConstellation.getConstellation((constellations.get(j).toString())));
+        JSONArray systems = (JSONArray) constel.get("systems");
+        for (int k = 0; k < systems.size(); k++) {
 
-
+          JSONObject system =
+              (JSONObject) jsonParser.parse(GetSystem.getSystemId(systems.get(k).toString()));
+          String systemId = system.get("system_id").toString();
+          String systemName = system.get("name").toString();
+        }
+      }
     }
-
-
 
     return "I guess it worked";
   }
