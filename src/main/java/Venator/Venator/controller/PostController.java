@@ -1,5 +1,7 @@
 package Venator.Venator.controller;
 
+import Venator.Venator.dbEntity.RegionMappingEntity;
+import Venator.Venator.dbRepo.RegionMappingRepository;
 import Venator.Venator.service.*;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostController {
 
-  @Autowired public GetIdsByName getIdsByName;
-  @Autowired public GetSystemKills getSystemKills;
+  @Autowired private GetIdsByName getIdsByName;
+  @Autowired private GetSystemKills getSystemKills;
+  @Autowired private RegionMappingRepository regionMappingRepository;
 
   @RequestMapping("/getIdsByNamePost")
   public String getIdsByNamePost() throws IOException {
@@ -28,30 +31,50 @@ public class PostController {
     return results;
   }
 
-  @RequestMapping("/directory")
-  public String directory() throws Exception {
+  @RequestMapping("/directoryRefresh")
+  public String directoryRefresh() throws Exception {
+
+    String regionName;
+    Long regionId;
+    String constellationName;
+    Long constellationId;
+    String systemName;
+    Long systemId;
 
     JSONArray jsonArray =
-        (JSONArray) readJsonSimpleDemo("src/main/resources/json_config/RegionMappings.json");
+        (JSONArray) readJson("src/main/resources/json_config/RegionMappings.json");
     JSONObject obj;
     JSONParser jsonParser = new JSONParser();
     for (int i = 0; i < jsonArray.size(); i++) {
       obj = (JSONObject) (jsonArray.get(i));
-      String regionId = obj.get("id").toString();
-      JSONObject region = (JSONObject) jsonParser.parse(GetRegion.getRegion(regionId));
+      regionId = Long.parseLong(obj.get("id").toString());
+      regionName = obj.get("name").toString();
+      JSONObject region = (JSONObject) jsonParser.parse(GetLocationData.getRegion(regionId.toString()));
       JSONArray constellations = (JSONArray) region.get("constellations");
       for (int j = 0; j < constellations.size(); j++) {
         JSONObject constel =
             (JSONObject)
                 jsonParser.parse(
-                    GetConstellation.getConstellation((constellations.get(j).toString())));
+                    GetLocationData.getConstellation((constellations.get(j).toString())));
+        constellationId = Long.parseLong(constel.get("constellation_id").toString());
+        constellationName = constel.get("name").toString();
         JSONArray systems = (JSONArray) constel.get("systems");
         for (int k = 0; k < systems.size(); k++) {
 
           JSONObject system =
-              (JSONObject) jsonParser.parse(GetSystem.getSystemId(systems.get(k).toString()));
-          String systemId = system.get("system_id").toString();
-          String systemName = system.get("name").toString();
+              (JSONObject) jsonParser.parse(GetLocationData.getSystemId(systems.get(k).toString()));
+          systemId = Long.parseLong(system.get("system_id").toString());
+          systemName = system.get("name").toString();
+          System.out.println(regionId+" /// "+regionName+" /// "+constellationId+" /// "+constellationName+" /// "+systemId+" /// "+systemName);
+          RegionMappingEntity RME = new RegionMappingEntity();
+          RME.setRegionId(regionId);
+          RME.setRegionName(regionName);
+          RME.setConstellationId(constellationId);
+          RME.setConstellationName(constellationName);
+          RME.setSystemId(systemId);
+          RME.setSystemName(systemName);
+
+          regionMappingRepository.save(RME);
 
         }
       }
@@ -60,7 +83,7 @@ public class PostController {
     return "I guess it worked";
   }
 
-  public static Object readJsonSimpleDemo(String filename) throws Exception {
+  public static Object readJson(String filename) throws Exception {
     FileReader reader = new FileReader(filename);
     JSONParser jsonParser = new JSONParser();
     return jsonParser.parse(reader);

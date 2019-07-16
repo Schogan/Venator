@@ -5,9 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(
-    name = "RegionMapping",
-    uniqueConstraints =
-        @UniqueConstraint(columnNames = {"RegionId", "ConstellationId", "SystemId"}))
+    name = "RegionMapping")
 public class RegionMappingEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
