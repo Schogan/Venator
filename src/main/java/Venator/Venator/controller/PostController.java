@@ -32,7 +32,7 @@ public class PostController {
   public String directory() throws Exception {
 
     JSONArray jsonArray =
-        (JSONArray) readJsonSimpleDemo("src/main/resources/json_config/RegionMappings.json");
+        (JSONArray) readJson("src/main/resources/json_config/RegionMappings.json");
     JSONObject obj;
     JSONParser jsonParser = new JSONParser();
     for (int i = 0; i < jsonArray.size(); i++) {
@@ -59,7 +59,7 @@ public class PostController {
     return "I guess it worked";
   }
 
-  public static Object readJsonSimpleDemo(String filename) throws Exception {
+  public static Object readJson(String filename) throws Exception {
     FileReader reader = new FileReader(filename);
     JSONParser jsonParser = new JSONParser();
     return jsonParser.parse(reader);
