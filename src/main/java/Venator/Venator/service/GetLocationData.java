@@ -4,9 +4,11 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GetLocationData {
-  public static String getConstellation(String constellationId) throws IOException {
+  public String getConstellation(String constellationId) throws IOException {
 
     OkHttpClient client = new OkHttpClient();
 
@@ -27,7 +29,7 @@ public class GetLocationData {
     return response.body().string();
   }
 
-  public static String getRegion(String regionId) throws IOException {
+  public String getRegion(String regionId) throws IOException {
 
     OkHttpClient client = new OkHttpClient();
 
@@ -48,7 +50,7 @@ public class GetLocationData {
     return response.body().string();
   }
 
-  public static String getSystemId(String systemId) throws IOException {
+  public String getSystemId(String systemId) throws IOException {
 
     OkHttpClient client = new OkHttpClient();
 

@@ -4,8 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(
-    name = "RegionMapping")
+@Table(name = "RegionMapping")
 public class RegionMappingEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
