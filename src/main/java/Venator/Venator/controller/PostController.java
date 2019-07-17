@@ -2,6 +2,8 @@ package Venator.Venator.controller;
 
 import Venator.Venator.service.*;
 import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +22,7 @@ public class PostController {
   }
 
   @RequestMapping("/getSystemKills")
-  public String getSystemKillsPost() throws IOException {
+  public String getSystemKillsPost() throws IOException, ParseException {
     String results = getSystemKills.getSystemKills();
     return results;
   }

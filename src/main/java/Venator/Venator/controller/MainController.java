@@ -1,6 +1,8 @@
 package Venator.Venator.controller;
 
+import Venator.Venator.models.RegionSelectModel;
 import Venator.Venator.models.TestModel;
+import Venator.Venator.service.ProcessFormSelection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
 
-  @Autowired public TestModel testModel;
+  @Autowired private TestModel testModel;
+  @Autowired private RegionSelectModel regionSelectModel;
+  @Autowired private ProcessFormSelection processFormSelection;
   private static final Log logger = LogFactory.getLog(MainController.class);
 
   @GetMapping("/processSelection")
   public String processForm(Model model){
-    model.addAttribute("processForm", testModel);
+    model.addAttribute("processForm", regionSelectModel);
     return "processForm";
   }
   @PostMapping("/processSelection")
-  public String processSubmit(@ModelAttribute TestModel testModel){
-    this.testModel.setMultiCheckboxSelectedValues(testModel.getMultiCheckboxSelectedValues());
+  public String processSubmit(@ModelAttribute RegionSelectModel regionSelectModel){
+    this.regionSelectModel.setMultiCheckboxSelectedValues(regionSelectModel.getMultiCheckboxSelectedValues());
+    processFormSelection.processFormSelection(regionSelectModel.getMultiCheckboxSelectedValues());
     return "processResult";
   }
 
