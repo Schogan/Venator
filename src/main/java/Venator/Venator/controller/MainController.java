@@ -16,6 +16,17 @@ public class MainController {
   @Autowired public TestModel testModel;
   private static final Log logger = LogFactory.getLog(MainController.class);
 
+  @GetMapping("/processSelection")
+  public String processForm(Model model){
+    model.addAttribute("processForm", testModel);
+    return "processForm";
+  }
+  @PostMapping("/processSelection")
+  public String processSubmit(@ModelAttribute TestModel testModel){
+    this.testModel.setMultiCheckboxSelectedValues(testModel.getMultiCheckboxSelectedValues());
+    return "processResult";
+  }
+
   @GetMapping("/getIdsByName")
   public String nameForm(Model model) {
     model.addAttribute("getIdByName", testModel);
