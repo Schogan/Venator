@@ -14,9 +14,10 @@ Create Tree display to show(order by #NPC kills)
 	----SHIP KILLS(Auto Retrieve every 60 minutes)
 	----System jumps(Auto Retrieve every 60 minutes)
 	----Flag if constellation is an Incursion
-	----ACTIVE PILOTS IN SPACE(I don't think this is publically available)
 	----Sov info(who owns the space)
-	----System Killboard info(Recent kills number of pilots involved)
+	------------------------------------
+	----ACTIVE PILOTS IN SPACE(I don't think this is publicly available)
+	---System Kill board info(Recent kills number of pilots involved)
 	----List of all systems in jump range
 
 

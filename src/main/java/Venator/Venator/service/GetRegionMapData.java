@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GetLocationData {
+public class GetRegionMapData {
   public String getConstellation(String constellationId) throws IOException {
 
     OkHttpClient client = new OkHttpClient();
