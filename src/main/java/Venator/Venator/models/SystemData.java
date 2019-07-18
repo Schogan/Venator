@@ -92,4 +92,19 @@ public class SystemData {
   public void setSystemJumps(Long systemJumps) {
     this.systemJumps = systemJumps;
   }
+
+  @Override
+  public String toString()
+  {
+    return "SystemData{" +
+            "region='" + region + '\'' +
+            ", constellation='" + constellation + '\'' +
+            ", systemName='" + systemName + '\'' +
+            ", systemId=" + systemId +
+            ", npcKills=" + npcKills +
+            ", podKills=" + podKills +
+            ", shipKills=" + shipKills +
+            ", systemJumps=" + systemJumps +
+            '}';
+  }
 }

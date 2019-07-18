@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RefreshDirectory {
 
-  @Autowired
-  GetRegionMapData getRegionMapData;
+  @Autowired GetRegionMapData getRegionMapData;
   @Autowired private RegionMappingRepository regionMappingRepository;
 
   public void refreshDirectory() throws Exception {
@@ -46,7 +45,8 @@ public class RefreshDirectory {
         for (int k = 0; k < systems.size(); k++) {
 
           JSONObject system =
-              (JSONObject) jsonParser.parse(getRegionMapData.getSystemId(systems.get(k).toString()));
+              (JSONObject)
+                  jsonParser.parse(getRegionMapData.getSystemId(systems.get(k).toString()));
           systemId = Long.parseLong(system.get("system_id").toString());
           systemName = system.get("name").toString();
           System.out.println(

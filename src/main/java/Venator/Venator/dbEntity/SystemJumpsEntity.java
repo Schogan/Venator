@@ -16,7 +16,6 @@ public class SystemJumpsEntity {
   private Long systemId;
 
   @Column(name = "ShipJumps")
-  @NotNull
   private Long shipJumps;
 
   public Long getId() {

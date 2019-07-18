@@ -4,7 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "SystemKillsMapping")
+@Table(
+    name = "SystemKillsMapping",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"SystemId"})})
 public class SystemKillsEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,15 +18,12 @@ public class SystemKillsEntity {
   private Long systemId;
 
   @Column(name = "NpcKills")
-  @NotNull
   private Long npcKills;
 
   @Column(name = "PodKills")
-  @NotNull
   private Long podKills;
 
   @Column(name = "ShipKills")
-  @NotNull
   private Long shipKills;
 
   public Long getId() {
