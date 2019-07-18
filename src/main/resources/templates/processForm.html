@@ -7,8 +7,6 @@
 <body>
 <h1>Names To Get</h1>
 <form action="#" th:action="@{/processSelection}" th:object="${processForm}" method="post">
-    <p>Character: <textarea rows = "4" cols = "40" th:field="*{character}"></textarea></p>
-    <p>System: <input type="text" th:field="*{system}" /></p>
     <ul>
         <li th:each="checkboxValue: ${multiCheckboxAllValues}">
             <input type="checkbox"

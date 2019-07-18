@@ -1,20 +1,21 @@
 package Venator.Venator.dbRepo;
 
 import Venator.Venator.dbEntity.RegionMappingEntity;
+import java.util.ArrayList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RegionMappingRepository extends JpaRepository<RegionMappingEntity, Long> {
 
-  public RegionMappingEntity findByRegionIdAndConstellationIdAndSystemId(
+  RegionMappingEntity findByRegionIdAndConstellationIdAndSystemId(
       Long regionId, Long constellationId, Long systemId);
 
-  public RegionMappingEntity findByRegionId(Long regionId);
+  RegionMappingEntity findByRegionId(Long regionId);
 
-  RegionMappingEntity findByRegionName(String regionName);
+  ArrayList<RegionMappingEntity> findByRegionName(String regionName);
 
-  public RegionMappingEntity findByConstellationId(Long constellationId);
+  RegionMappingEntity findByConstellationId(Long constellationId);
 
-  public RegionMappingEntity findBySystemId(Long systemId);
+  RegionMappingEntity findBySystemId(Long systemId);
 }

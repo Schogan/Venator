@@ -21,13 +21,15 @@ public class MainController {
   private static final Log logger = LogFactory.getLog(MainController.class);
 
   @GetMapping("/processSelection")
-  public String processForm(Model model){
+  public String processForm(Model model) {
     model.addAttribute("processForm", regionSelectModel);
     return "processForm";
   }
+
   @PostMapping("/processSelection")
-  public String processSubmit(@ModelAttribute RegionSelectModel regionSelectModel){
-    this.regionSelectModel.setMultiCheckboxSelectedValues(regionSelectModel.getMultiCheckboxSelectedValues());
+  public String processSubmit(@ModelAttribute RegionSelectModel regionSelectModel) {
+    this.regionSelectModel.setMultiCheckboxSelectedValues(
+        regionSelectModel.getMultiCheckboxSelectedValues());
     processFormSelection.processFormSelection(regionSelectModel.getMultiCheckboxSelectedValues());
     return "processResult";
   }

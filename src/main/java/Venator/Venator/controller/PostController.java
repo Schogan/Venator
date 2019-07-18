@@ -2,7 +2,6 @@ package Venator.Venator.controller;
 
 import Venator.Venator.service.*;
 import java.io.IOException;
-
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
