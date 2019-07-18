@@ -1,11 +1,9 @@
 package Venator.Venator.service;
 
-
 import Venator.Venator.dbEntity.SystemKillsEntity;
 import Venator.Venator.dbRepo.SystemKillsRepository;
 import com.squareup.okhttp.*;
 import java.io.IOException;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -46,21 +44,14 @@ public class GetSystemKills {
 
     JSONArray jsonArray = (JSONArray) jsonParser.parse(response.body().string());
     JSONObject obj;
-    for (Object object:jsonArray){
+    for (Object object : jsonArray) {
       obj = (JSONObject) object;
       systemId = Long.valueOf(obj.get("system_id").toString());
       npcKills = Long.valueOf(obj.get("npc_kills").toString());
       podKills = Long.valueOf(obj.get("pod_kills").toString());
       shipKills = Long.valueOf(obj.get("ship_kills").toString());
 
-      System.out.println(
-                      + systemId
-                      + " /// "
-                      + npcKills
-                      + " /// "
-                      + podKills
-                      + " /// "
-                      + shipKills);
+      System.out.println(+systemId + " /// " + npcKills + " /// " + podKills + " /// " + shipKills);
 
       SystemKillsEntity SKE = new SystemKillsEntity();
       SKE.setSystemId(systemId);
@@ -69,7 +60,6 @@ public class GetSystemKills {
       SKE.setShipKills(shipKills);
 
       systemKillsRepository.save(SKE);
-
     }
 
     return response.body().string();

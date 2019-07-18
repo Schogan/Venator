@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SystemKillsRepository extends JpaRepository<SystemKillsEntity, Long> {
 
-    SystemKillsEntity findBySystemId(Long systemId);
+  SystemKillsEntity findBySystemId(Long systemId);
 }
