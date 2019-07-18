@@ -5,7 +5,6 @@ import Venator.Venator.dbRepo.SovereigntyRepository;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,63 +14,88 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-@EnableScheduling
-@Component
-public class GetSovereignty {
+import java.io.IOException;
 
-  @Autowired SovereigntyRepository sovereigntyRepository;
+    //@EnableScheduling
+    @Component
+    public class GetSovereignty {
 
-  @Scheduled(fixedRate = 86400000)
-  public String getSovereignty() throws IOException, ParseException {
-    Long allianceId;
-    Long corporationId;
-    Long systemId;
+        @Autowired
+        SovereigntyRepository sovereigntyRepository;
+        @Autowired GetCorporationInformation getCorporationInformation;
+        @Autowired  GetAllianceInformation getAllianceInformation;
 
-    OkHttpClient client = new OkHttpClient();
+        //@Scheduled(fixedRate = 86400000)
+        public String getSovereigntyMapping() throws IOException, ParseException {
+            Long allianceId;
+            Long corporationId;
+            Long systemId;
+            String allianceName = null;
+            String corporationName = null;
 
-    Request request =
-        new Request.Builder()
-            .url(
-                "https://esi.evetech.net/latest/sovereignty/map/?datasource=tranquility&language=en-us")
-            .get()
-            .addHeader("Accept", "*/*")
-            .addHeader("Host", "esi.evetech.net")
-            .addHeader("Connection", "keep-alive")
-            .addHeader("cache-control", "no-cache")
-            .build();
 
-    Response response = client.newCall(request).execute();
-    JSONParser jsonParser = new JSONParser();
+            OkHttpClient client = new OkHttpClient();
 
-    JSONArray jsonArray = (JSONArray) jsonParser.parse(response.body().string());
-    JSONObject obj;
-    for (Object object : jsonArray) {
-      obj = (JSONObject) object;
+            Request request =
+                    new Request.Builder()
+                            .url(
+                                    "https://esi.evetech.net/latest/sovereignty/map/?datasource=tranquility&language=en-us")
+                            .get()
+                            .addHeader("Accept", "*/*")
+                            .addHeader("Host", "esi.evetech.net")
+                            .addHeader("Connection", "keep-alive")
+                            .addHeader("cache-control", "no-cache")
+                            .build();
 
-      if (obj.get("alliance_id") == null) {
-        allianceId = null;
-      } else {
-        allianceId = Long.valueOf(obj.get("alliance_id").toString());
-      }
+            Response response = client.newCall(request).execute();
+            JSONParser jsonParser = new JSONParser();
 
-      if (obj.get("corporation_id") == null) {
-        corporationId = null;
-      } else {
-        corporationId = Long.valueOf(obj.get("corporation_id").toString());
-      }
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(response.body().string());
+            JSONObject obj;
+            for (Object object:jsonArray){
+                obj = (JSONObject) object;
 
-      systemId = Long.valueOf(obj.get("system_id").toString());
+                if(obj.get("alliance_id")==null){
+                    allianceId = null;
+                    allianceName = null;
+                }else{
+                    allianceId = Long.valueOf(obj.get("alliance_id").toString());
+                    allianceName = getAllianceInformation.getAllianceInformation(allianceId);
+                }
 
-      System.out.println(allianceId + " /// " + corporationId + " /// " + systemId);
+                if(obj.get("corporation_id")==null){
+                    corporationId = null;
+                    corporationName = null;
+                }else{
+                    corporationId = Long.valueOf(obj.get("corporation_id").toString());
+                    corporationName = getCorporationInformation.getCorporationInformation(corporationId);
+                }
 
-      SovereigntyEntity SE = new SovereigntyEntity();
-      SE.setAllianceId(allianceId);
-      SE.setCorporationId(corporationId);
-      SE.setSystemId(systemId);
 
-      sovereigntyRepository.save(SE);
+                systemId = Long.valueOf(obj.get("system_id").toString());
+
+                System.out.println(
+                        allianceId
+                                + " /// "
+                                + allianceName
+                                + " /// "
+                                + corporationId
+                                + " /// "
+                                + corporationName
+                                + " /// "
+                                + systemId);
+
+                SovereigntyEntity SE = new SovereigntyEntity();
+                SE.setAllianceId(allianceId);
+                SE.setAllianceName(allianceName);
+                SE.setCorporationId(corporationId);
+                SE.setCorporationName(corporationName);
+                SE.setSystemId(systemId);
+
+                sovereigntyRepository.save(SE);
+
+            }
+
+            return response.body().string();
+        }
     }
-
-    return response.body().string();
-  }
-}
