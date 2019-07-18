@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RefreshDirectory {
 
-  @Autowired GetLocationData getLocationData;
+  @Autowired
+  GetRegionMapData getRegionMapData;
   @Autowired private RegionMappingRepository regionMappingRepository;
 
   public void refreshDirectory() throws Exception {
@@ -32,20 +33,20 @@ public class RefreshDirectory {
       regionId = Long.parseLong(obj.get("id").toString());
       regionName = obj.get("name").toString();
       JSONObject region =
-          (JSONObject) jsonParser.parse(getLocationData.getRegion(regionId.toString()));
+          (JSONObject) jsonParser.parse(getRegionMapData.getRegion(regionId.toString()));
       JSONArray constellations = (JSONArray) region.get("constellations");
       for (int j = 0; j < constellations.size(); j++) {
         JSONObject constel =
             (JSONObject)
                 jsonParser.parse(
-                    getLocationData.getConstellation((constellations.get(j).toString())));
+                    getRegionMapData.getConstellation((constellations.get(j).toString())));
         constellationId = Long.parseLong(constel.get("constellation_id").toString());
         constellationName = constel.get("name").toString();
         JSONArray systems = (JSONArray) constel.get("systems");
         for (int k = 0; k < systems.size(); k++) {
 
           JSONObject system =
-              (JSONObject) jsonParser.parse(getLocationData.getSystemId(systems.get(k).toString()));
+              (JSONObject) jsonParser.parse(getRegionMapData.getSystemId(systems.get(k).toString()));
           systemId = Long.parseLong(system.get("system_id").toString());
           systemName = system.get("name").toString();
           System.out.println(
