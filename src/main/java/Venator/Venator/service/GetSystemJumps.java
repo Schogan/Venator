@@ -23,6 +23,7 @@ public class GetSystemJumps {
 
   @Scheduled(fixedRate = 3600000)
   public String getSystemJumps() throws IOException, ParseException {
+
     Long systemId;
     Long shipJumps;
 

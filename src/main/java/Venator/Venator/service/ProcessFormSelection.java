@@ -30,6 +30,26 @@ public class ProcessFormSelection {
       for (RegionMappingEntity entity : newMap) {
         SystemKillsEntity killsEntity = systemKillsRepository.findBySystemId(entity.getSystemId());
         SystemJumpsEntity jumpsEntity = systemJumpsRepository.findBySystemId(entity.getSystemId());
+        Long npcKills;
+        Long podKills;
+        Long shipKills;
+        Long jumps;
+
+        if (killsEntity == null) {
+          npcKills = null;
+          podKills = null;
+          shipKills = null;
+        } else {
+          npcKills = killsEntity.getNpcKills();
+          podKills = killsEntity.getPodKills();
+          shipKills = killsEntity.getShipKills();
+        }
+
+        if (jumpsEntity == null) {
+          jumps = null;
+        } else {
+          jumps = jumpsEntity.getShipJumps();
+        }
 
         systemDataList.add(
             new SystemData(
@@ -37,10 +57,10 @@ public class ProcessFormSelection {
                 entity.getConstellationName(),
                 entity.getSystemName(),
                 entity.getSystemId(),
-                killsEntity.getNpcKills(),
-                killsEntity.getPodKills(),
-                killsEntity.getShipKills(),
-                jumpsEntity.getShipJumps()));
+                npcKills,
+                podKills,
+                shipKills,
+                jumps));
       }
     }
     for (SystemData systemData : systemDataList) {
