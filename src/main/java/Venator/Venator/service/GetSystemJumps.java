@@ -27,6 +27,8 @@ public class GetSystemJumps {
     Long systemId;
     Long shipJumps;
 
+    systemJumpsRepository.deleteAll();
+
     OkHttpClient client = new OkHttpClient();
 
     Request request =

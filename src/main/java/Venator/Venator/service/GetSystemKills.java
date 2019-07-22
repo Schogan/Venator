@@ -28,6 +28,8 @@ public class GetSystemKills {
 
     OkHttpClient client = new OkHttpClient();
 
+    systemKillsRepository.deleteAll();
+
     Request request =
         new Request.Builder()
             .url(

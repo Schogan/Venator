@@ -13,7 +13,7 @@ public class SystemKillsEntity {
   @Column(name = "ID")
   private Long id;
 
-  @Column(name = "SystemId")
+  @Column(name = "SystemId",unique=true)
   @NotNull
   private Long systemId;
 

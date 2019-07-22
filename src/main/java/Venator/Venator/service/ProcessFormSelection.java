@@ -22,6 +22,7 @@ public class ProcessFormSelection {
   private static final Log logger = LogFactory.getLog(ProcessFormSelection.class);
 
   public void processFormSelection(String[] regionselection) {
+
     ArrayList<SystemData> systemDataList = new ArrayList<>();
 
     for (String regionselected : regionselection) {
