@@ -26,6 +26,8 @@ public class GetIncursions {
     Long constellationId;
     Boolean isIncursion = true;
 
+    constellationIncursionRepository.deleteAll();
+
     OkHttpClient client = new OkHttpClient();
 
     Request request =

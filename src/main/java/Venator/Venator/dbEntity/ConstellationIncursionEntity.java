@@ -11,7 +11,7 @@ public class ConstellationIncursionEntity {
   @Column(name = "ID")
   private Long id;
 
-  @Column(name = "ConstellationId")
+  @Column(name = "ConstellationId", unique = true)
   @NotNull
   private Long constellationId;
 
