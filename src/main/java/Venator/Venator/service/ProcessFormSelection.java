@@ -21,9 +21,11 @@ public class ProcessFormSelection {
   @Autowired public SystemJumpsRepository systemJumpsRepository;
   private static final Log logger = LogFactory.getLog(ProcessFormSelection.class);
 
+  ArrayList<SystemData> systemDataList = new ArrayList<>();
+
   public void processFormSelection(String[] regionselection) {
 
-    ArrayList<SystemData> systemDataList = new ArrayList<>();
+
 
     for (String regionselected : regionselection) {
       ArrayList<RegionMappingEntity> newMap =
@@ -37,9 +39,9 @@ public class ProcessFormSelection {
         Long jumps;
 
         if (killsEntity == null) {
-          npcKills = null;
-          podKills = null;
-          shipKills = null;
+          npcKills = 0L;
+          podKills = 0L;
+          shipKills = 0L;
         } else {
           npcKills = killsEntity.getNpcKills();
           podKills = killsEntity.getPodKills();
@@ -47,7 +49,7 @@ public class ProcessFormSelection {
         }
 
         if (jumpsEntity == null) {
-          jumps = null;
+          jumps = 0L;
         } else {
           jumps = jumpsEntity.getShipJumps();
         }
@@ -67,5 +69,9 @@ public class ProcessFormSelection {
     for (SystemData systemData : systemDataList) {
       logger.info(systemData.toString());
     }
+  }
+
+  public ArrayList getSystemDataList(){
+    return systemDataList;
   }
 }

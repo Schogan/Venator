@@ -1,5 +1,8 @@
 package Venator.Venator.models;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SystemData {
   private String region;
   private String constellation;
@@ -9,6 +12,8 @@ public class SystemData {
   private Long podKills;
   private Long shipKills;
   private Long systemJumps;
+
+  public  SystemData(){}
 
   public SystemData(
       String region,

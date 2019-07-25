@@ -1,11 +1,47 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Eve Lookup</title>
+    <title>Venator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel = "stylesheet"
+          type = "text/css"
+          th:href = "@{/css/master.css}" />
 </head>
 <body>
 <h1>Result</h1>
+    <ul id="myUL">
+        <li th:each="systemData: ${processResult}">
+            <span class="caret" th:text="'Region: ' +${systemData.region}">Region</span><br>
+            <ul class="nested">
+                <li><span class="caret" th:text="'Constellation: ' +${systemData.constellation}">Constellation</span><br>
+                    <ul class="nested">
+                        <li><span class="caret" th:text="'System: ' +${systemData.systemName}">System</span><br>
+                            <ul class="nested">
+                                <td th:text="'Number of Jumps: ' +${systemData.systemJumps}"/><br>
+                                <td th:text="'NPC Kills: ' +${systemData.getNpcKills()}"/><br>
+                                <td th:text="'Pod Kills: ' +${systemData.getPodKills()}"/><br>
+                                <td th:text="'Ship Kills: ' +${systemData.getShipKills()}"/><br>
+                                <br>
+                                <br>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 <a href="/processSelection">Submit another message</a>
 </body>
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function() {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+</script>
 </html>

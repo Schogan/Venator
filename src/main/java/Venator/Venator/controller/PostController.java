@@ -26,6 +26,7 @@ public class PostController {
     return results;
   }
 
+  //This endpoint is used to refresh the Region mapping table use table to export a new CSV file after running
   @RequestMapping("/directoryRefresh")
   public String directoryRefresh() throws Exception {
 
