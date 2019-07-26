@@ -4,6 +4,8 @@ import Venator.Venator.dbEntity.SystemKillsEntity;
 import Venator.Venator.dbRepo.SystemKillsRepository;
 import com.squareup.okhttp.*;
 import java.io.IOException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Component;
 public class GetSystemKills {
 
   @Autowired SystemKillsRepository systemKillsRepository;
+  private static final Log logger = LogFactory.getLog(GetSystemKills.class);
 
   @Scheduled(fixedRate = 3600000)
   public String getSystemKills() throws IOException, ParseException {
@@ -53,7 +56,7 @@ public class GetSystemKills {
       podKills = Long.valueOf(obj.get("pod_kills").toString());
       shipKills = Long.valueOf(obj.get("ship_kills").toString());
 
-      System.out.println(+systemId + " /// " + npcKills + " /// " + podKills + " /// " + shipKills);
+      logger.info(systemId + " /// " + npcKills + " /// " + podKills + " /// " + shipKills);
 
       SystemKillsEntity SKE = new SystemKillsEntity();
       SKE.setSystemId(systemId);

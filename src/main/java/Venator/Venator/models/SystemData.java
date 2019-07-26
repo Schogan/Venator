@@ -1,125 +1,49 @@
 package Venator.Venator.models;
 
+import Venator.Venator.dbEntity.SystemJumpsEntity;
+import Venator.Venator.dbEntity.SystemKillsEntity;
+import Venator.Venator.dbRepo.RegionMappingRepository;
+import Venator.Venator.dbRepo.SystemJumpsRepository;
+import Venator.Venator.dbRepo.SystemKillsRepository;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SystemData {
-  private String region;
-  private String constellation;
-  private String systemName;
-  private Long systemId;
-  private Long npcKills;
-  private Long podKills;
-  private Long shipKills;
-  private Long systemJumps;
 
-  public  SystemData(){}
+  @Autowired private RegionMappingRepository regionMappingRepository;
+  @Autowired private SystemKillsRepository systemKillsRepository;
+  @Autowired private SystemJumpsRepository systemJumpsRepository;
+  @Autowired private SystemMetaData systemMetaData;
 
-  public SystemData(
-      String region,
-      String constellation,
-      String systemName,
-      Long systemId,
-      Long npcKills,
-      Long podKills,
-      Long shipKills,
-      Long systemJumps) {
-    this.region = region;
-    this.constellation = constellation;
-    this.systemName = systemName;
-    this.systemId = systemId;
-    this.npcKills = npcKills;
-    this.podKills = podKills;
-    this.shipKills = shipKills;
-    this.systemJumps = systemJumps;
-  }
+  public Map<String, ArrayList> getSystemData(ArrayList<Long> systemId) {
+    Map<String, ArrayList> systemDataMap = new HashMap<>();
+    for (Long sysID : systemId) {
+      String systemName = regionMappingRepository.findBySystemId(sysID).getSystemName();
+      SystemKillsEntity killsEntity = systemKillsRepository.findBySystemId(sysID);
+      SystemJumpsEntity jumpsEntity = systemJumpsRepository.findBySystemId(sysID);
 
-  public String getRegion() {
-    return region;
-  }
+      if (killsEntity == null) {
+        systemMetaData.setNpcKills(0L);
+        systemMetaData.setPodKills(0L);
+        systemMetaData.setShipKills(0L);
+      } else {
+        systemMetaData.setNpcKills(killsEntity.getNpcKills());
+        systemMetaData.setPodKills(killsEntity.getPodKills());
+        systemMetaData.setShipKills(killsEntity.getShipKills());
+      }
 
-  public void setRegion(String region) {
-    this.region = region;
-  }
-
-  public String getConstellation() {
-    return constellation;
-  }
-
-  public void setConstellation(String constellation) {
-    this.constellation = constellation;
-  }
-
-  public String getSystemName() {
-    return systemName;
-  }
-
-  public void setSystemName(String systemName) {
-    this.systemName = systemName;
-  }
-
-  public Long getSystemId() {
-    return systemId;
-  }
-
-  public void setSystemId(Long systemId) {
-    this.systemId = systemId;
-  }
-
-  public Long getNpcKills() {
-    return npcKills;
-  }
-
-  public void setNpcKills(Long npcKills) {
-    this.npcKills = npcKills;
-  }
-
-  public Long getPodKills() {
-    return podKills;
-  }
-
-  public void setPodKills(Long podKills) {
-    this.podKills = podKills;
-  }
-
-  public Long getShipKills() {
-    return shipKills;
-  }
-
-  public void setShipKills(Long shipKills) {
-    this.shipKills = shipKills;
-  }
-
-  public Long getSystemJumps() {
-    return systemJumps;
-  }
-
-  public void setSystemJumps(Long systemJumps) {
-    this.systemJumps = systemJumps;
-  }
-
-  @Override
-  public String toString() {
-    return "SystemData{"
-        + "region='"
-        + region
-        + '\''
-        + ", constellation='"
-        + constellation
-        + '\''
-        + ", systemName='"
-        + systemName
-        + '\''
-        + ", systemId="
-        + systemId
-        + ", npcKills="
-        + npcKills
-        + ", podKills="
-        + podKills
-        + ", shipKills="
-        + shipKills
-        + ", systemJumps="
-        + systemJumps
-        + '}';
+      if (jumpsEntity == null) {
+        systemMetaData.setJumps(0L);
+      } else {
+        systemMetaData.setJumps(jumpsEntity.getShipJumps());
+      }
+      ArrayList systemInfo = systemMetaData.getSystemMetaData();
+      systemDataMap.put(systemName, systemInfo);
+    }
+    return systemDataMap;
   }
 }

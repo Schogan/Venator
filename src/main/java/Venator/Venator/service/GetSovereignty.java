@@ -6,6 +6,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,6 +25,7 @@ public class GetSovereignty {
   @Autowired private SovereigntyRepository sovereigntyRepository;
   @Autowired private GetCorporationInformation getCorporationInformation;
   @Autowired private GetAllianceInformation getAllianceInformation;
+  private static final Log logger = LogFactory.getLog(GetSovereignty.class);
 
   @Value("${getsov}")
   private boolean getSov;
@@ -76,7 +79,7 @@ public class GetSovereignty {
 
         systemId = Long.valueOf(obj.get("system_id").toString());
 
-        System.out.println(
+        logger.info(
             allianceId
                 + " /// "
                 + allianceName

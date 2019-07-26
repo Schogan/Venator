@@ -15,7 +15,7 @@ public interface RegionMappingRepository extends JpaRepository<RegionMappingEnti
 
   ArrayList<RegionMappingEntity> findByRegionName(String regionName);
 
-  RegionMappingEntity findByConstellationId(Long constellationId);
+  ArrayList<RegionMappingEntity> findByConstellationId(Long constellationId);
 
   RegionMappingEntity findBySystemId(Long systemId);
 }

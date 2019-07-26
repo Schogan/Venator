@@ -6,6 +6,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class GetSystemJumps {
 
   @Autowired SystemJumpsRepository systemJumpsRepository;
+  private static final Log logger = LogFactory.getLog(GetSystemJumps.class);
 
   @Scheduled(fixedRate = 3600000)
   public String getSystemJumps() throws IOException, ParseException {
@@ -52,7 +55,7 @@ public class GetSystemJumps {
       systemId = Long.valueOf(obj.get("system_id").toString());
       shipJumps = Long.valueOf(obj.get("ship_jumps").toString());
 
-      System.out.println(+systemId + " /// " + shipJumps);
+      logger.info(systemId + " /// " + shipJumps);
 
       SystemJumpsEntity SKE = new SystemJumpsEntity();
       SKE.setSystemId(systemId);

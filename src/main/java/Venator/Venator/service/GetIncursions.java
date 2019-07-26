@@ -6,6 +6,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class GetIncursions {
 
   @Autowired ConstellationIncursionRepository constellationIncursionRepository;
+  private static final Log logger = LogFactory.getLog(GetIncursions.class);
 
   @Scheduled(fixedRate = 86400000)
   public String getIncursions() throws IOException, ParseException {
@@ -49,7 +52,7 @@ public class GetIncursions {
       obj = (JSONObject) object;
       constellationId = Long.valueOf(obj.get("constellation_id").toString());
 
-      System.out.println(+constellationId + " /// " + isIncursion);
+      logger.info(+constellationId + " /// " + isIncursion);
 
       ConstellationIncursionEntity CIE = new ConstellationIncursionEntity();
       CIE.setConstellationId(constellationId);

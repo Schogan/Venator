@@ -3,6 +3,8 @@ package Venator.Venator.service;
 import Venator.Venator.dbEntity.RegionMappingEntity;
 import Venator.Venator.dbRepo.RegionMappingRepository;
 import java.io.FileReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,6 +16,7 @@ public class RefreshDirectory {
 
   @Autowired GetRegionMapData getRegionMapData;
   @Autowired private RegionMappingRepository regionMappingRepository;
+  private static final Log logger = LogFactory.getLog(RefreshDirectory.class);
 
   public void refreshDirectory() throws Exception {
     String regionName;
@@ -49,7 +52,7 @@ public class RefreshDirectory {
                   jsonParser.parse(getRegionMapData.getSystemId(systems.get(k).toString()));
           systemId = Long.parseLong(system.get("system_id").toString());
           systemName = system.get("name").toString();
-          System.out.println(
+          logger.info(
               regionId
                   + " /// "
                   + regionName

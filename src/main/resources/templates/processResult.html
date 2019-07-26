@@ -10,12 +10,14 @@
 <body>
 <h1>Result</h1>
     <ul id="myUL">
-        <li th:each="systemData: ${processResult}">
-            <span class="caret" th:text="'Region: ' +${systemData.region}">Region</span><br>
+        <li th:each="regionData: ${processResult}">
+            <span class="caret" th:text="'Region: ' +${regionData.key}">Region</span><br>
             <ul class="nested">
-                <li><span class="caret" th:text="'Constellation: ' +${systemData.constellation}">Constellation</span><br>
+                <li th:each="constData: ${regionData.value}">
+                    <span class="caret" th:text="'Constellation: ' +${constData.key}">Constellation</span><br>
                     <ul class="nested">
-                        <li><span class="caret" th:text="'System: ' +${systemData.systemName}">System</span><br>
+                        <li th:each="systemData: ${constData.value}">
+                            <span class="caret" th:text="'System: ' +${systemData.key}">System</span><br>
                             <ul class="nested">
                                 <td th:text="'Number of Jumps: ' +${systemData.systemJumps}"/><br>
                                 <td th:text="'NPC Kills: ' +${systemData.getNpcKills()}"/><br>
