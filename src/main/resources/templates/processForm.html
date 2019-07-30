@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Eve Lookup</title>
+    <title>Venator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
 </head>
 <body>
-<h1>Names To Get</h1>
+<h1>Region Select</h1>
 <form action="#" th:action="@{/processSelection}" th:object="${processForm}" method="post">
     <ul>
         <li th:each="checkboxValue: ${multiCheckboxAllValues}">
