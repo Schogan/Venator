@@ -36,7 +36,9 @@ public class MainController {
   @GetMapping("/processResult")
   public String regionResults(Model model) {
     Map<String, Map> systemDataList = processFormSelection.getSystemDataList();
+    Map<String, Long> topNpcKillsMap = processFormSelection.getTopNpcKillsMap();
     model.addAttribute("processResult", systemDataList);
+    model.addAttribute("npcKills", topNpcKillsMap);
     return "processResult";
   }
 

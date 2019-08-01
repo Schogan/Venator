@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
 public class ProcessFormSelection {
   @Autowired private RegionMappingRepository regionMappingRepository;
   @Autowired private ConstellationData constellationData;
+  @Autowired private TopNpcKills topNpcKills;
   private static final Log logger = LogFactory.getLog(ProcessFormSelection.class);
   private Map<String, Map> regionSelectionMap = new HashMap<>();
+  private Map<String, Long> topNpcKillsMap = new HashMap<>();
 
   public void processFormSelection(String[] regionSelection) {
 
@@ -27,6 +29,7 @@ public class ProcessFormSelection {
       }
       LinkedHashSet<Long> hashSet = new LinkedHashSet<>(constIDs);
       ArrayList<Long> newConstIds = new ArrayList<>(hashSet);
+      topNpcKillsMap = topNpcKills.getTopNpcKills(newConstIds);
       regionSelectionMap.put(regionSelected, constellationData.getConstellationData(newConstIds));
     }
     logger.info(regionSelectionMap.toString());
@@ -34,5 +37,9 @@ public class ProcessFormSelection {
 
   public Map<String, Map> getSystemDataList() {
     return regionSelectionMap;
+  }
+
+  public Map<String, Long> getTopNpcKillsMap() {
+    return topNpcKillsMap;
   }
 }
