@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Eve-Font';
+    src: url('eve.eot'); /* IE9 Compat Modes */
+    src: url('eve.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('eve.woff') format('woff'), /* Modern Browsers */
+    url('eve.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('eve.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+* {
+    background-color: black;
+    color: #8b5194;;
+    font-family: Eve-Font;
+}
 /* Remove default bullets */
 ul, #myUL {
     list-style-type: none;
@@ -18,7 +31,7 @@ ul, #myUL {
 /* Create the caret/arrow with a unicode, and style it */
 .caret::before {
     content: "\25B6";
-    color: black;
+    /*color: black;*/
     display: inline-block;
     margin-right: 6px;
 }
@@ -37,3 +50,4 @@ ul, #myUL {
 .active {
     display: block;
 }
+
