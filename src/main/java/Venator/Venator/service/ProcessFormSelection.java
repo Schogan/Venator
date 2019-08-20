@@ -19,7 +19,7 @@ public class ProcessFormSelection {
   private Map<String, Long> topNpcKillsMap = new HashMap<>();
 
   public void processFormSelection(String[] regionSelection) {
-
+    regionSelectionMap = new HashMap<>();
     for (String regionSelected : regionSelection) {
       ArrayList<RegionMappingEntity> allEntries =
           regionMappingRepository.findByRegionName(regionSelected);

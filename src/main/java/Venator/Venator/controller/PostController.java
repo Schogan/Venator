@@ -33,6 +33,6 @@ public class PostController {
 
     refreshDirectory.refreshDirectory();
 
-    return "I guess it worked";
+    return "!!!!!HUZZAH IT DIDN'T BLOW UP!!!!!";
   }
 }

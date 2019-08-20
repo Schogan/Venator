@@ -3,22 +3,42 @@
 <head>
     <title>Venator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
-<body>
-<h1>Region Select</h1>
-<form action="#" th:action="@{/processSelection}" th:object="${processForm}" method="post">
-    <ul>
-        <li th:each="checkboxValue: ${multiCheckboxAllValues}">
-            <input type="checkbox"
-                   th:field="*{multiCheckboxSelectedValues}"
-                   th:value="${checkboxValue}" />
-            <label
-                    th:for="${#ids.prev('multiCheckboxSelectedValues')}"
-                    th:text="${checkboxValue}"></label>
-        </li>
-    </ul>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
+<body class="background black">
+    <nav>
+        <div class="nav-wrapper grey">
+            <a href="#" class="brand-logo center">Venator</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="http:\\localhost:8080/processSelection">Selection page</a></li>
+                <li><a href="placeholder.html">Tab2</a></li>
+                <li><a href="placeholder.html">Tab3</a></li>
+            </ul>
+            <ul id="nav-login" class="right hide-on-med-and-down">
+                <li><a href="placeholder.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row background grey darken-4">
+        <div class="col s6">
+            <h3 class="white-text">Region Select</h3>
+            <form action="#" th:action="@{/processSelection}" th:object="${processForm}" method="post">
+                <ul>
+                    <li th:each="checkboxValue: ${multiCheckboxAllValues}">
+                        <input type="checkbox"
+                            th:field="*{multiCheckboxSelectedValues}"
+                            th:value="${checkboxValue}" />
+
+                        <label class="white-text" th:for="${#ids.prev('multiCheckboxSelectedValues')}"
+                            th:text="${checkboxValue}"></label>
+                    </li>
+                </ul>
+                <p><input class="btn white waves-effect waves-red" type="submit" value="Submit" />
+                   <input class="btn white waves-effect waves-red" type="reset" value="Reset" /></p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

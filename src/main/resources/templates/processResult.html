@@ -6,15 +6,24 @@
     <link rel = "stylesheet"
           type = "text/css"
           th:href = "@{/css/master.css}" />
+    <style>
+        .Sameline {
+            display: inline-flex;
+            border: 2px solid gray;
+            padding:2px;
+            margin:10px;
+            flex-direction: column;
+        }
+    </style>
 </head>
-<body>
+<body><div class="Sameline"><div>
 <h1>Result</h1>
     <ul id="myUL">
         <li th:each="regionData: ${processResult}">
             <span class="caret" th:text="'Region: ' +${regionData.key}">Region</span><br>
             <ul class="nested">
                 <li th:each="constData: ${regionData.value}">
-                    <span class="caret" th:text="': ' +${constData.key}">Constellation</span><br>
+                    <span class="caret" th:text="'Constellation: ' +${constData.key}">Constellation</span><br>
                     <ul class="nested">
                         <li th:each="systemData: ${constData.value}">
                             <span class="caret" th:text="'System: ' +${systemData.key}">System</span><br>
@@ -32,6 +41,13 @@
         </li>
     </ul>
 <a href="/processSelection">Return to Region select</a>
+</div></div>
+<div class="Sameline">
+    <h1>NPC Kills By System</h1>
+    <li th:each="nextSystem: ${npcKills}">
+        <td th:text="${nextSystem.key}+ ': '+${nextSystem.value}"/><br>
+    </li>
+</div>
 </body>
 
 <script>

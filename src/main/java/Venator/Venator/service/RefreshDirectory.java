@@ -28,6 +28,8 @@ public class RefreshDirectory {
     FileReader reader = new FileReader("src/main/resources/json_config/RegionMappings.json");
     JSONParser jsonParser = new JSONParser();
 
+    regionMappingRepository.deleteAll();
+
     JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
     JSONObject obj;
     for (int i = 0; i < jsonArray.size(); i++) {
